@@ -1,0 +1,27 @@
+var Foobot = require('./api');
+
+newData = Foobot.GetLast(86400, 3600);
+
+var data = JSON.parse(newData);
+
+ 
+var formattedData = [[
+  'Time',
+  'Volatile\nCompounds\n(ppb)',
+  'CO2 (ppm)'
+]];
+ 
+data.datapoints.forEach(function(row, ind){
+    formattedData.push([
+      dateFormatter(row[data.sensors.indexOf('time')]),
+      row[data.sensors.indexOf('voc')],
+      row[data.sensors.indexOf('co2')]
+    ]);
+});
+ 
+function dateFormatter(timestamp) {
+  var date = new Date(timestamp*1000);
+  return date.getHours() + ':00';
+}
+
+return formattedData;
