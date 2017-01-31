@@ -1,0 +1,7 @@
+
+var config = {
+  key: 'API KEY HERE',
+  username: 'username@example.com',
+  endpoint: 'https://api.foobot.io',
+  deviceID: 'DEVICE ID HERE'
+} 
