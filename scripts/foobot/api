@@ -1,0 +1,31 @@
+var http = require('http');
+var config = require('./key').config
+
+function GetDeviceId(){
+  var target = config.endpoint + '/v2/owner/' + encodeURIComponent(config.username) + '/device/'
+
+  var requestParams = {
+    url: target,
+    method: 'GET',
+    headers: {
+      'X-API-KEY-TOKEN': config.key
+    }
+  };
+
+  return http.request(requestParams).body;
+}
+
+function GetLast(period, averageBy){
+  var target = config.endpoint + '/v2/device/' + config.deviceID + '/datapoint/' + period + '/last/' + averageBy + '/';
+
+  var requestParams = {
+    url: target,
+    method: 'GET',
+    headers: {
+      'X-API-KEY-TOKEN': config.key
+    }
+  };
+  
+  return http.request(requestParams).body;
+}
+
