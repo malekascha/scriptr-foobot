@@ -1,13 +1,13 @@
 var Foobot = require('./api');
 
-newData = Foobot.GetLast(86400, 3600);
+newData = Foobot.GetLast24Hours(86400, 360);
 
 var data = JSON.parse(newData);
 
  
 var formattedData = [[
   'Time',
-  'Volatile\nCompounds\n(ppb)',
+  'Volatile\nCompds\n(ppb)',
   'CO2 (ppm)'
 ]];
  
@@ -21,7 +21,7 @@ data.datapoints.forEach(function(row, ind){
  
 function dateFormatter(timestamp) {
   var date = new Date(timestamp*1000);
-  return date.getHours() + ':00';
+  return date.getHours() + ':' + date.getMinutes();
 }
-
+publish("foobot",{result:formattedData});
 return formattedData;
